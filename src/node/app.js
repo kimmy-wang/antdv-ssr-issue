@@ -51,8 +51,11 @@ const homeTemplate = fs.readFileSync(
   "utf-8"
 );
 
-app.get("/", async (req, res) => {
-  const { app } = createHomeApp();
+app.get("/home/*", async (req, res) => {
+  const { app, router } = createHomeApp();
+
+  await router.push(req.url);
+  await router.isReady();
 
   const appContent = await renderToString(app);
 
