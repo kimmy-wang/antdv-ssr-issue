@@ -15,10 +15,10 @@ function resolve(dir) {
 module.exports = {
   pages: process.env.SSR
     ? {
-        home: "./src/index/main.server.ts",
+        index: "./src/index/main.server.ts",
       }
     : {
-        home: "./src/index/main.ts",
+        index: "./src/index/main.ts",
       },
   lintOnSave: process.env.NODE_ENV !== "production",
   productionSourceMap: false,
@@ -67,21 +67,21 @@ module.exports = {
         ],
       },
     };
-    if (process.env.NODE_ENV === "production") {
-      config.plugins = [
-        new WebpackBar({
-          name,
-        }),
-        new CompressionWebpackPlugin({
-          filename: "[path].gz[query]",
-          algorithm: "gzip",
-          test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
-          threshold: 10240,
-          minRatio: 0.8,
-          deleteOriginalAssets: false,
-        }),
-      ];
-    }
+    // if (process.env.NODE_ENV === "production") {
+    //   config.plugins = [
+    //     new WebpackBar({
+    //       name,
+    //     }),
+    //     new CompressionWebpackPlugin({
+    //       filename: "[path].gz[query]",
+    //       algorithm: "gzip",
+    //       test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
+    //       threshold: 10240,
+    //       minRatio: 0.8,
+    //       deleteOriginalAssets: false,
+    //     }),
+    //   ];
+    // }
     return config;
   },
   chainWebpack: (webpackConfig) => {

@@ -8,7 +8,7 @@ const homePath = path.join(
   __dirname,
   "../../dist",
   "node",
-  manifest["home.js"]
+  manifest["index.js"]
 );
 const createHomeApp = require(homePath).default;
 
@@ -47,11 +47,11 @@ app.use(
 );
 
 const homeTemplate = fs.readFileSync(
-  path.join(__dirname, "../../dist/client/home.html"),
+  path.join(__dirname, "../../dist/client/index.html"),
   "utf-8"
 );
 
-app.get("/home/*", async (req, res) => {
+app.get("*", async (req, res) => {
   const { app, router } = createHomeApp();
 
   await router.push(req.url);

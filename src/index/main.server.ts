@@ -1,21 +1,18 @@
 import { createSSRApp } from "vue";
 import { createMemoryHistory } from "vue-router";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import Vant from "vant";
-import Antd from "ant-design-vue/lib/breadcrumb";
 import App from "./App.vue";
 import "ant-design-vue/dist/antd.css";
-import "vant/lib/index.css";
 import createRouter from "./router";
+import { applyComponents } from "@/index/component";
 
 export default function () {
   const app = createSSRApp(App);
-  const router = createRouter(createMemoryHistory("/home/"));
+  const router = createRouter(createMemoryHistory());
 
-  app.use(router);
-  app.use(Vant);
-  app.use(Antd);
-  app.component("font-awesome-icon", FontAwesomeIcon);
+  applyComponents(app)
+    .use(router)
+    .component("font-awesome-icon", FontAwesomeIcon);
 
   return {
     app,
